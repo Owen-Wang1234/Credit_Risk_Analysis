@@ -1,7 +1,7 @@
 # Credit_Risk_Analysis
 
 ## Project Overview
-The client is seeking a reliable method to quickly predict the credit risk of potential loan candidates based on some prior historical data about them. The plan is to develop supervised machine learning models to evaluate credit risk based on credit card data from LendingClub. The ideal model should take a large group of candidates and determine their credit risk in an accurate and precise manner.
+The client is seeking a reliable method to quickly predict the credit risk of potential loan candidates based on some prior historical data about them. The plan is to develop supervised machine learning models to evaluate credit risk based on credit card data from LendingClub. The ideal model should take a large group of candidates and quickly determine their credit risk in an accurate and precise manner.
 
 ## Resources
 
@@ -26,7 +26,7 @@ The supervised machine learning models are developed in Python within the machin
 ### ETL - LendingClub Credit Data
 Prior to loading the data, the column names are established, and the target value is identified. The DataFrame is loaded with the input data, and null columns and rows are dropped. The focus is the credit risk of potential loans, so those that already have the loans issued are filtered out. The interest rate is converted into a floating numeric type, and the loan status (the target parameter) is recategorized between two values: "low risk" (from "Current") and "high risk" (status is not "Current"). The DataFrame then has the index reset.
 
-Before the data can be split between training and testing groups, any other non-target columns with categorical non-numeric types must be converted to numeric types, so those are identified. Pandas can then handle the conversion by using the `get_dummies` method for binary encoding. The result moves the target column to `y` and leaves the rest to `X`. A quick check shows that the data contains **68,470 low risk candidates and 347 high risk candidates** prior to splitting between training and testing. The splitting is done with the `random_state` seed set to `1` to ensure reproducible results. This same `random_state` seed of `1` is also used in every sampling and Logistic Regression modeling methods.
+Before the data can be split between training and testing groups, any other feature (non-target) columns with categorical non-numeric types must be converted to numeric types, so those are identified. Pandas can then handle the conversion by using the `get_dummies` method for binary encoding. Afterwards, the target column goes to `y` and the rest go to `X`. A quick check shows that the data set to be run through the machine learning models contains **68,470 low risk candidates and 347 high risk candidates** prior to splitting between training and testing. The splitting is done with the `random_state` seed set to `1` to ensure reproducible results if that seed is used. This same `random_state` seed of `1` is also used in every sampling and Logistic Regression modeling methods.
 
 ### Resampling Methods
 The data in use is heavily unbalanced; approximately 0.5% of the data has one outcome (the minority class - in this project, the high risk candidates), and the remaining 99.5% has the other outcome (the majority class - the low risk candidates). In order to properly train the Logistic Regression model, the training data must be resampled towards more balanced proportions.
@@ -52,3 +52,20 @@ SMOTE can be combined with Edited Nearest Neighbors (ENN) to form the SMOTEENN m
 The actual test results and the predictions are compared to produce the balanced accuracy score, the confusion matrix, and the imbalanced classification report for evaluation of this resampling method.
 
 ### Ensemble Learning Methods
+When designing a machine learning model, one way to get a good performance is to combine multiple models to help improve accuracy and robustness while mitigating the variance (the ensemble learning method).
+
+#### 1 - Balanced Random Forest Classifier
+The Random Forest type of algorithm samples the data and runs multiple smaller and simpler decision trees. Each tree is based on a small random sample group used to train that tree; these trees would not be accurate individually, but the whole culmination should yield a better performance. Additionally, this product should be more robust against outliers and overfitting. The Balanced Random Forest Classifier algorithm, used in this project, is a variation that randomly undersamples each sample group for balancing purposes.
+
+The Balanced Random Forest Classifier model is instantiated with mostly default settings; the estimator count (number of random forests) of one hundred and a random state of one are the only added inputs. Rather than resampling the training data, they can be directly used to fit the model. The fitted model produces a set of predictions after feeding in the test data.
+
+The actual test results and the predictions are compared to produce the balanced accuracy score, the confusion matrix, and the imbalanced classification report for evaluation of this ensemble learning method.
+
+Random Forest algorithms have one additional feature - they also calculate the feature importance, the amount of impact a feature has on the decision process. Thus, the list of features and the list of the calculated importance values are zipped together and then sorted by importance in descending order to see which features have the most impact on the credit risk evaluation process.
+
+#### 2 - Easy Ensemble AdaBoost Classifier
+The Boosting type of algorithm samples the data into multiple training sets which are run through their own learning model in sequence. Each model learns from the errors of the prior model, allowing them to develop a slightly better accuracy. Each individual prediction is combined to produce the ensemble prediction. The Adaptive Boosting (AdaBoost) method adds an extra step when training the next model; after the errors of the prior model are evaluated, those errors are given extra weight to reduce and minimize similar errors in subsequent models. The Easy Ensemble AdaBoost Classifier algorithm, used in this project, is a variation that "is an ensemble of AdaBoost learners trained on different balanced bootstrap samples. The balancing is achieved by random under-sampling" (taken from the Easy Ensemble documentation).
+
+The Easy Ensemble model is instantiated with mostly default settings; the estimator count of one hundred and a random state of one are the only added inputs. Rather than resampling the training data, they can be directly used to fit the model. The fitted model produces a set of predictions after feeding in the test data.
+
+The actual test results and the predictions are compared to produce the balanced accuracy score, the confusion matrix, and the imbalanced classification report for evaluation of this ensemble learning method.
