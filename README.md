@@ -96,7 +96,7 @@ An additional output available from random forest classifiers is the calculated 
 
 - The precision scores in the classification report focus on the columns of the confusion matrix. The values reflect the percentage of predictions that were accurate (how many candidates who are labeled as high/low risk truly are high/low risk). The precision scores are as follows:
 
-| Learning Model | Recall (High Risk) | Recall (Low Risk) |
+| Learning Model | Precision (High Risk) | Precision (Low Risk) |
 | --- | ---: | ---: |
 | Random Oversampling | 0.01 | 1.00 |
 | SMOTE | 0.01 | 1.00 |
@@ -107,7 +107,7 @@ An additional output available from random forest classifiers is the calculated 
 
 - The recall scores in the classification report focus on the rows of the confusion matrix. The values reflect the percentage of the class that were correctly labeled (how many candidates who are high/low risk are correctly labeled as high/low risk). The recall scores are as follows:
 
-| Learning Model | Precision (High Risk) | Precision (Low Risk) |
+| Learning Model | Recall (High Risk) | Recall (Low Risk) |
 | --- | ---: | ---: |
 | Random Oversampling | 0.71 | 0.60 |
 | SMOTE | 0.63 | 0.69 |
@@ -128,3 +128,8 @@ An additional output available from random forest classifiers is the calculated 
 | Easy Ensemble AdaBoost | 0.9317 |
 
 ### Summary
+Despite trying many different machine learning models, the precision scores reflect an issue shown in the confusion matrices: These models flag many candidates as high-risk, but less than one hundred actually are high-risk while all the rest are flagged incorrectly. Also, so few risky individuals slip past detection to be considered low-risk that the low-risk precision deceivingly seems perfect. This is a prominent issue when handling such an unbalanced data set; the minority class makes up **less than one-half percent** of the numbers and might almost be considered negligible just by the scale of numbers alone.
+
+At least the recall scores look more decent, showing that the models can correctly label enough of the candidates. As shown in the table, the resampling methods are not necessarily as sensitive as the ensemble learning methods, and the oversampling methods have a lower disparity in recall scores than the undersampling methods. The Adaptive Boosting method has demonstrated exemplary results; the main trait of having the component models learn from the errors of the previous models while training results in a much improved accuracy when labeling the candidates as high-risk or low-risk. The Easy Ensemble model easily has the best precision score, recall scores, and balanced accuracy score out of all six models.
+
+However, **not one of these supervised machine learning models** is recommended at this time, not even the Easy Ensemble model. Even if they can boast great recall scores and thus great balanced accuracy scores, the fact that the precision for high-risk is **barely ten percent at best** means these models are not able to effectively complete the task assigned (differentiate high-risk from low-risk). The feature importance output from the Balanced Random Forest method indicates that the most important feature carries at most five to seven percent of impact on the decision-making process. Dropping features with less than one percent in importance would not improve the models much because they barely made any impact at all before. If having staff on hand to individually evaluate each candidate is not desirable, then more sophisticated machine learning operations would be required because deciding which candidates are high-risk is demonstrated to be a very complicated process with many factors to find this very tiny minority.
