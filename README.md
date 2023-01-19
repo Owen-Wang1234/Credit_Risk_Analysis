@@ -69,3 +69,59 @@ The Boosting type of algorithm samples the data into multiple training sets whic
 The Easy Ensemble model is instantiated with mostly default settings; the estimator count of one hundred and a random state of one are the only added inputs. Rather than resampling the training data, they can be directly used to fit the model. The fitted model produces a set of predictions after feeding in the test data.
 
 The actual test results and the predictions are compared to produce the balanced accuracy score, the confusion matrix, and the imbalanced classification report for evaluation of this ensemble learning method.
+
+### Results
+After running several different types of supervised machine learning models for imbalanced data sets, the balanced accuracy score, the confusion matrix, and the imbalanced classification report are all collected for each model and displayed here:
+
+1. NAIVE RANDOM OVERSAMPLING
+![Performance Metrics of the Naive Random Oversampling Model](https://github.com/Owen-Wang1234/Credit_Risk_Analysis/blob/main/Images/RandomOverSampleResults.png)
+
+2. SMOTE
+![Performance Metrics of the SMOTE Model](https://github.com/Owen-Wang1234/Credit_Risk_Analysis/blob/main/Images/SMOTEResults.png)
+
+3. CLUSTER CENTROIDS UNDERSAMPLING
+![Performance Metrics of the Custer Centroids Model](https://github.com/Owen-Wang1234/Credit_Risk_Analysis/blob/main/Images/ClusterCentroidResults.png)
+
+4. SMOTEENN
+![Performance Metrics of the SMOTEENN Model](https://github.com/Owen-Wang1234/Credit_Risk_Analysis/blob/main/Images/SMOTEENNResults.png)
+
+5. BALANCED RANDOM FOREST CLASSIFIER
+![Performance Metrics of the Balanced Random Forest Model](https://github.com/Owen-Wang1234/Credit_Risk_Analysis/blob/main/Images/BalancedRandomForestResults.png)
+
+An additional output available from random forest classifiers is the calculated importance of the features in the data set. The top 30 features based on their importance in determing the credit risk of the candidates are listed below:
+![Top 30 Features According to the Random Forest](https://github.com/Owen-Wang1234/Credit_Risk_Analysis/blob/main/Images/Top30Features.png)
+
+6. EASY ENSEMBLE ADABOOST CLASSIFIER
+![Performance Metrics of the Easy Ensemble Model](https://github.com/Owen-Wang1234/Credit_Risk_Analysis/blob/main/Images/EasyEnsembleResults.png)
+
+- The precision scores in the classification report focus on the columns of the confusion matrix. The values reflect the percentage of predictions that were accurate (how many candidates who are labeled as high/low risk truly are high/low risk). The precision scores are as follows:
+| Learning Model | Recall (High Risk) | Recall (Low Risk) |
+| --- | ---: | ---: |
+| Random Oversampling | 0.01 | 1.00 |
+| SMOTE | 0.01 | 1.00 |
+| Cluster Centroids | 0.01 | 1.00 |
+| SMOTEENN | 0.01 | 1.00 |
+| Balanced Random Forest | 0.03 | 1.00 |
+| Easy Ensemble AdaBoost | 0.09 | 1.00 |
+
+- The recall scores in the classification report focus on the rows of the confusion matrix. The values reflect the percentage of the class that were correctly labeled (how many candidates who are high/low risk are correctly labeled as high/low risk). The recall scores are as follows:
+| Learning Model | Precision (High Risk) | Precision (Low Risk) |
+| --- | ---: | ---: |
+| Random Oversampling | 0.71 | 0.60 |
+| SMOTE | 0.63 | 0.69 |
+| Cluster Centroids | 0.69 | 0.40 |
+| SMOTEENN | 0.70 | 0.58 |
+| Balanced Random Forest | 0.70 | 0.87 |
+| Easy Ensemble AdaBoost | 0.92 | 0.94 |
+
+- The balanced accuracy scores of these models are the averages of the calculated recall scores for the two classes. This helps to evaluate the overall performance of a model while mitigating the effects of working with imbalanced data sets. The balanced accuracy scores are as follows:
+| Learning Model | Balanced Accuracy |
+| --- | ---: |
+| Random Oversampling | 0.6573 |
+| SMOTE | 0.6622 |
+| Cluster Centroids | 0.5447 |
+| SMOTEENN | 0.6392 |
+| Balanced Random Forest | 0.7885 |
+| Easy Ensemble AdaBoost | 0.9317 |
+
+### Summary
