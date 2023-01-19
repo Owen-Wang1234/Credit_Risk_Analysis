@@ -95,6 +95,7 @@ An additional output available from random forest classifiers is the calculated 
 ![Performance Metrics of the Easy Ensemble Model](https://github.com/Owen-Wang1234/Credit_Risk_Analysis/blob/main/Images/EasyEnsembleResults.png)
 
 - The precision scores in the classification report focus on the columns of the confusion matrix. The values reflect the percentage of predictions that were accurate (how many candidates who are labeled as high/low risk truly are high/low risk). The precision scores are as follows:
+
 | Learning Model | Recall (High Risk) | Recall (Low Risk) |
 | --- | ---: | ---: |
 | Random Oversampling | 0.01 | 1.00 |
@@ -105,6 +106,7 @@ An additional output available from random forest classifiers is the calculated 
 | Easy Ensemble AdaBoost | 0.09 | 1.00 |
 
 - The recall scores in the classification report focus on the rows of the confusion matrix. The values reflect the percentage of the class that were correctly labeled (how many candidates who are high/low risk are correctly labeled as high/low risk). The recall scores are as follows:
+
 | Learning Model | Precision (High Risk) | Precision (Low Risk) |
 | --- | ---: | ---: |
 | Random Oversampling | 0.71 | 0.60 |
@@ -115,6 +117,7 @@ An additional output available from random forest classifiers is the calculated 
 | Easy Ensemble AdaBoost | 0.92 | 0.94 |
 
 - The balanced accuracy scores of these models are the averages of the calculated recall scores for the two classes. This helps to evaluate the overall performance of a model while mitigating the effects of working with imbalanced data sets. The balanced accuracy scores are as follows:
+
 | Learning Model | Balanced Accuracy |
 | --- | ---: |
 | Random Oversampling | 0.6573 |
